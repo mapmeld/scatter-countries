@@ -10,7 +10,6 @@ var setcolor = {
   "Brazil": "#f8f",
   "Colombia": "midnightblue",
   "Ecuador": "#e48",
-  "French Guiana": "#0f0",
   "Guyana": "orange",
   "Suriname": "#00f"
 };

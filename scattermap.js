@@ -4,23 +4,8 @@ var transition_to_map, transition_to_chart;
 var geopath = d3.geo.path();
 var ctrlat, ctrlng, geoscale;
 
-function x(d) {
-  var area = 0;
-  if(d.geometry.type == "Polygon"){
-    for(var e=0;e<d.geometry.coordinates.length;e++){
-      area += poly_area( d.geometry.coordinates[e] );
-    }
-  }
-  else{
-    for(var i=0;i<d.geometry.coordinates.length;i++){
-      for(var e=0;e<d.geometry.coordinates[i].length;e++){
-        area += poly_area( d.geometry.coordinates[i][e] );
-      }
-    }
-  }
-  return area;
-}
-function y(d) { return 1 * d.properties.name.length; }
+function x(d) { return d.properties.area }
+function y(d) { return d.properties.name.length; }
 function radius(d) { return 1; }
 function color(d) { return setcolor[ d.properties.name ]; }
 
@@ -29,8 +14,8 @@ var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 75.5},
     height = 600 - margin.top - margin.bottom;
 
 // Various scales.
-var xScale = d3.scale.log().domain([5, 2600]).range([0, width]),
-    yScale = d3.scale.linear().domain([0, 14]).range([height, 0]);
+var xScale = d3.scale.log().domain([50000, 10000000]).range([0, width]),
+    yScale = d3.scale.linear().domain([0, 13]).range([height, 0]);
 
 // The x & y axes.
 var toyr = function(e){ console.log(e); return "" + e; };
@@ -61,7 +46,7 @@ svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height - 6)
-    .text("land area");
+    .text("land area (sq mi)");
 
 // Add a y-axis label.
 svg.append("text")
@@ -103,21 +88,6 @@ var centroid = function(poly, mytimer, time_end){
   else{
     return [ x, y ];
   }
-};
-
-var poly_area = function(pts){
-  var area=0;
-  var nPts = pts.length;
-  var j=nPts-1;
-  var p1, p2;
-  for(var i=0;i<nPts;j=i++){
-    p1={x: pts[i][0], y: pts[i][1] };
-    p2={x: pts[j][0], y: pts[j][1] };
-    area+=p1.x*p2.y;
-    area-=p1.y*p2.x;
-  }
-  area/=2;
-  return area;
 };
 
 // Load the data.
