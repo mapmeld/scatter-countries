@@ -84,7 +84,7 @@ var centroidAndSpan = function(poly){
     var polys=poly.coordinates;
     for(var e=0;e<polys.length;e++){
       var pts=polys[e][0];
-      ptcount += pts.length;
+      ptcount += pts.length - 1;
       for(var p=0;p<pts.length-1;p++){
         x += pts[p][0] * 1.0;
         y += pts[p][1] * 1.0;
@@ -94,8 +94,8 @@ var centroidAndSpan = function(poly){
         minlng = Math.min(minlng, x);
       }
     }
-    x /= ptcount - 1;
-    y /= ptcount - 1;
+    x /= ptcount;
+    y /= ptcount;
   }
   return [[ x, y ], Math.max( maxlat - minlat, maxlng - minlng )];
 };
