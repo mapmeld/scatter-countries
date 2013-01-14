@@ -2,9 +2,20 @@
 
 Scatter-Countries uses D3.js to turn a GeoJSON file into a scatter plot of countries.
 
+## Examples
+
+<h3><a href="http://mapmeld.github.com/scatter-countries/index.html">Scatter Plot (Nations)</a></h3>
+
 <img src="https://raw.github.com/mapmeld/scatter-countries/gh-pages/screen.png"/>
 
-The data in this demo is a subset of https://github.com/johan/world.geo.json
+<h3><a href="http://mapmeld.github.com/scatter-countries/scatterstates.html">Scatter Plot (States)</a></h3>
+
+<img src="https://raw.github.com/mapmeld/scatter-countries/gh-pages/scaledstates.png"/>
+
+<h3><a href="http://mapmeld.github.com/scatter-countries/population.html">Scatter Plot (Population)</a></h3>
+
+
+The data in these demos are a subset of https://github.com/johan/world.geo.json
 
 ## How does it work?
 
