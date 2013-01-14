@@ -71,10 +71,10 @@ var centroidAndSpan = function(poly){
     for(var p=0;p<pts.length-1;p++){
       x += pts[p][0] * 1.0;
       y += pts[p][1] * 1.0;
-      maxlat = Math.max(maxlat, y);
-      minlat = Math.min(minlat, y);
-      maxlng = Math.max(maxlng, x);
-      minlng = Math.min(minlng, x);
+      maxlat = Math.max(maxlat, pts[p][1] * 1.0);
+      minlat = Math.min(minlat, pts[p][1] * 1.0);
+      maxlng = Math.max(maxlng, pts[p][0] * 1.0);
+      minlng = Math.min(minlng, pts[p][0] * 1.0);
     }
     x /= pts.length - 1;
     y /= pts.length - 1;
@@ -86,12 +86,12 @@ var centroidAndSpan = function(poly){
       var pts=polys[e][0];
       ptcount += pts.length - 1;
       for(var p=0;p<pts.length-1;p++){
+        maxlat = Math.max(maxlat, pts[p][1] * 1.0);
+        minlat = Math.min(minlat, pts[p][1] * 1.0);
+        maxlng = Math.max(maxlng, pts[p][0] * 1.0);
+        minlng = Math.min(minlng, pts[p][0] * 1.0);
         x += pts[p][0] * 1.0;
         y += pts[p][1] * 1.0;
-        maxlat = Math.max(maxlat, y);
-        minlat = Math.min(minlat, y);
-        maxlng = Math.max(maxlng, x);
-        minlng = Math.min(minlng, x);
       }
     }
     x /= ptcount;
@@ -120,19 +120,18 @@ d3.json("usa.geojson", function(err, countries) {
       minspan = Math.min(minspan, ctr[1]);
     }
   }
-  geoscale = 100000;
 
   // load states
   var countrygeos = svg.selectAll("svg")
     .data(countries.features).enter()
     .append("path")
-    .attr("d", geopath.projection( d3.geo.mercator().scale(geoscale).center([0,0]) ) )
+    .attr("d", geopath.projection( d3.geo.mercator().scale(1).center([0,0]) ) )
     .style("fill", function(d) { return color(d); })
     .style("stroke", "#fff");
 
   // center states and scale them
   for(var t=0;t<countrygeos[0].length;t++){
-    geoscale = 40000 / Math.pow(countries.features[t].properties.span, 0.3);
+    geoscale = 11000 / Math.pow(countries.features[t].properties.span, 0.65);
     d3.select(countrygeos[0][t]).attr("d", geopath.projection( d3.geo.mercator().scale(geoscale).center( centroidAndSpan(countries.features[t].geometry)[0] ) ) );
   }
 
