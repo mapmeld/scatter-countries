@@ -8,7 +8,7 @@ Scatter-Countries uses D3.js to turn a GeoJSON file into a scatter plot of count
 
 <img src="https://raw.github.com/mapmeld/scatter-countries/gh-pages/screen.png"/>
 
-<h3><a href="http://mapmeld.github.com/scatter-countries/scatterstates.html">Scatter Plot (States)</a></h3>
+<h3><a href="http://mapmeld.github.com/scatter-countries/scatterstates.html">Scatter Plot (Independently-Scaled US States)</a></h3>
 
 <img src="https://raw.github.com/mapmeld/scatter-countries/gh-pages/scaledstates.png"/>
 
